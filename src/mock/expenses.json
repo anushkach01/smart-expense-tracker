@@ -1,0 +1,162 @@
+[
+  {
+    "id": "exp-1",
+    "title": "Pizza Hut",
+    "category": "Food",
+    "amount": 500,
+    "date": "2024-06-16",
+    "description": "Dinner with family"
+  },
+  {
+    "id": "exp-2",
+    "title": "Uber Ride",
+    "category": "Travel",
+    "amount": 900,
+    "date": "2024-06-15",
+    "description": "Office commute"
+  },
+  {
+    "id": "exp-3",
+    "title": "Amazon Shopping",
+    "category": "Shopping",
+    "amount": 1200,
+    "date": "2024-06-14",
+    "description": "Home essentials"
+  },
+  {
+    "id": "exp-4",
+    "title": "Electricity Bill",
+    "category": "Bills",
+    "amount": 2000,
+    "date": "2024-06-14",
+    "description": "Monthly electricity bill"
+  },
+  {
+    "id": "exp-5",
+    "title": "Netflix Subscription",
+    "category": "Entertainment",
+    "amount": 649,
+    "date": "2024-06-13",
+    "description": "Monthly subscription"
+  },
+  {
+    "id": "exp-6",
+    "title": "Grocery Shopping",
+    "category": "Food",
+    "amount": 1100,
+    "date": "2024-06-12",
+    "description": "Weekly groceries"
+  },
+  {
+    "id": "exp-7",
+    "title": "Flight Ticket",
+    "category": "Travel",
+    "amount": 3500,
+    "date": "2024-06-10",
+    "description": "Mumbai to Delhi"
+  },
+  {
+    "id": "exp-8",
+    "title": "Gym Membership",
+    "category": "Others",
+    "amount": 2500,
+    "date": "2024-06-09",
+    "description": "Monthly gym fee"
+  },
+  {
+    "id": "exp-9",
+    "title": "Mobile Recharge",
+    "category": "Bills",
+    "amount": 599,
+    "date": "2024-06-08",
+    "description": "Prepaid recharge"
+  },
+  {
+    "id": "exp-10",
+    "title": "Zomato Order",
+    "category": "Food",
+    "amount": 450,
+    "date": "2024-06-07",
+    "description": "Lunch order"
+  },
+  {
+    "id": "exp-11",
+    "title": "Spotify Premium",
+    "category": "Entertainment",
+    "amount": 119,
+    "date": "2024-06-06",
+    "description": "Music subscription"
+  },
+  {
+    "id": "exp-12",
+    "title": "Ola Cab",
+    "category": "Travel",
+    "amount": 350,
+    "date": "2024-06-05",
+    "description": "Airport drop"
+  },
+  {
+    "id": "exp-13",
+    "title": "Flipkart Order",
+    "category": "Shopping",
+    "amount": 2499,
+    "date": "2024-06-04",
+    "description": "Clothing purchase"
+  },
+  {
+    "id": "exp-14",
+    "title": "Internet Bill",
+    "category": "Bills",
+    "amount": 999,
+    "date": "2024-06-03",
+    "description": "Monthly broadband"
+  },
+  {
+    "id": "exp-15",
+    "title": "Movie Tickets",
+    "category": "Entertainment",
+    "amount": 800,
+    "date": "2024-06-02",
+    "description": "Weekend movie"
+  },
+  {
+    "id": "exp-16",
+    "title": "Restaurant Dinner",
+    "category": "Food",
+    "amount": 1800,
+    "date": "2024-06-01",
+    "description": "Anniversary dinner"
+  },
+  {
+    "id": "exp-17",
+    "title": "Bus Pass",
+    "category": "Travel",
+    "amount": 500,
+    "date": "2024-05-31",
+    "description": "Monthly bus pass"
+  },
+  {
+    "id": "exp-18",
+    "title": "Book Purchase",
+    "category": "Others",
+    "amount": 650,
+    "date": "2024-05-30",
+    "description": "Programming books"
+  },
+  {
+    "id": "exp-19",
+    "title": "Water Bill",
+    "category": "Bills",
+    "amount": 300,
+    "date": "2024-05-29",
+    "description": "Monthly water bill"
+  },
+  {
+    "id": "exp-20",
+    "title": "Myntra Shopping",
+    "category": "Shopping",
+    "amount": 1750,
+    "date": "2024-05-28",
+    "description": "Summer collection"
+  }
+]

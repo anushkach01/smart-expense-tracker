@@ -1,0 +1,20 @@
+[
+  {
+    "id": "user-1",
+    "name": "Anushka Chandurkar",
+    "email": "anushkac@gmail.com",
+    "password": "password123",
+    "phone": "+91 98765 43210",
+    "location": "Bangalore, India",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Anushka"
+  },
+  {
+    "id": "user-2",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "password": "password123",
+    "phone": "+91 91234 56789",
+    "location": "Mumbai, India",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
+  }
+]
