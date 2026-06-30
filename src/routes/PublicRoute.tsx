@@ -6,7 +6,9 @@ interface PublicRouteProps {
 }
 
 const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const token =
+    localStorage.getItem('token') ||
+    sessionStorage.getItem('token');
 
   if (token) {
     return <Navigate to="/dashboard" replace />;

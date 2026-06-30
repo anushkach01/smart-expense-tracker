@@ -1,21 +1,26 @@
-﻿import React, { useEffect } from 'react';
+﻿import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { Add } from '@mui/icons-material';
+
 import useAppDispatch from '../hooks/useAppDispatch';
-import { fetchExpenses } from '../features/expenses/expenseSlice';
+import useAppSelector from '../hooks/useAppSelector';
+
+import { fetchExpenses, selectExpenseLoading } from '../features/expenses/expenseSlice';
+
 import PageHeader from '../components/common/PageHeader';
 import ExpenseTable from '../components/expenses/ExpenseTable';
 import ExpenseFilters from '../components/expenses/ExpenseFilters';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import useAppSelector from '../hooks/useAppSelector';
-import { selectExpenseLoading } from '../features/expenses/expenseSlice';
 
 const ExpensesPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const loading = useAppSelector(selectExpenseLoading);
-  const expenses = useAppSelector((state) => state.expenses.expenses);
+  const expenses = useAppSelector(
+    (state) => state.expenses.expenses
+  );
 
   useEffect(() => {
     if (expenses.length === 0) {
@@ -23,8 +28,14 @@ const ExpensesPage: React.FC = () => {
     }
   }, [dispatch, expenses.length]);
 
-  if (loading) {
-    return <LoadingSpinner message="Loading expenses..." />;
+  const handleAddExpense = useCallback(() => {
+    navigate('/expenses/add');
+  }, [navigate]);
+
+  if (loading && expenses.length === 0) {
+    return (
+      <LoadingSpinner message="Loading expenses..." />
+    );
   }
 
   return (
@@ -36,14 +47,22 @@ const ExpensesPage: React.FC = () => {
           <Button
             variant="contained"
             startIcon={<Add />}
-            onClick={() => navigate('/expenses/add')}
-            sx={{ borderRadius: 2 }}
+            onClick={handleAddExpense}
+            sx={{
+              borderRadius: 2,
+              textTransform: 'none',
+              px: 2.5,
+              py: 1,
+              fontWeight: 600,
+            }}
           >
             Add Expense
           </Button>
         }
       />
+
       <ExpenseFilters />
+
       <ExpenseTable />
     </Box>
   );

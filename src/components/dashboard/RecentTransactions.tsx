@@ -8,7 +8,10 @@ import {
   List,
   ListItem,
   Divider,
+  Chip,
 } from '@mui/material';
+import { ArrowForward } from '@mui/icons-material';
+
 import useAppSelector from '../../hooks/useAppSelector';
 import { selectExpenses } from '../../features/expenses/expenseSlice';
 import { getCategoryConfig } from '../../utils/categoryConfig';
@@ -24,102 +27,227 @@ const RecentTransactions: React.FC = React.memo(() => {
     [expenses]
   );
 
+  const getDisplayDate = (date: string) => {
+    const today = new Date();
+    const expenseDate = new Date(date);
+
+    const todayString = today.toDateString();
+    const expenseString = expenseDate.toDateString();
+
+    if (todayString === expenseString) {
+      return 'Today';
+    }
+
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    if (expenseString === yesterday.toDateString()) {
+      return 'Yesterday';
+    }
+
+    return formatShortDate(date);
+  };
+
   return (
-    <Card sx={{ p: 2.5, height: '100%' }}>
+    <Card
+      elevation={0}
+      sx={{
+        p: 3,
+        height: '100%',
+        borderRadius: 3,
+        border: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'space-between',
-          mb: 2,
+          alignItems: 'flex-start',
+          mb: 3,
         }}
       >
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          Recent Transactions
-        </Typography>
+        <Box>
+          <Typography
+            variant="h6"
+            fontWeight={700}
+          >
+            Recent Transactions
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+          >
+            Last 5 expenses
+          </Typography>
+        </Box>
+
         <Button
+          endIcon={<ArrowForward />}
           size="small"
           onClick={() => navigate('/expenses')}
-          sx={{ fontWeight: 600, fontSize: '0.8rem' }}
+          sx={{
+            textTransform: 'none',
+            fontWeight: 600,
+          }}
         >
           View All
         </Button>
       </Box>
 
-      <List disablePadding>
-        {recentExpenses.map((expense, index) => {
-          const config = getCategoryConfig(expense.category);
-          const Icon = config.Icon;
+      <List disablePadding>        {recentExpenses.length > 0 ? (
+          recentExpenses.map((expense, index) => {
+            const config = getCategoryConfig(expense.category);
+            const Icon = config.Icon;
 
-          return (
-            <React.Fragment key={expense.id}>
-              <ListItem disablePadding sx={{ py: 1.5 }}>
-                <Box
+            return (
+              <React.Fragment key={expense.id}>
+                <ListItem
+                  disablePadding
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: '100%',
-                    gap: 2,
+                    py: 1.5,
+                    px: 1,
+                    borderRadius: 2,
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      bgcolor: 'action.hover',
+                    },
                   }}
                 >
-                  {/* Icon */}
                   <Box
                     sx={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 2,
-                      bgcolor: config.bgColor,
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
+                      width: '100%',
+                      gap: 2,
                     }}
                   >
-                    <Icon sx={{ fontSize: 20, color: config.color }} />
-                  </Box>
-
-                  {/* Title & Category */}
-                  <Box sx={{ flex: 1, minWidth: 0 }}>
-                    <Typography
-                      variant="body2"
-                      sx={{ fontWeight: 600 }}
-                      color="text.primary"
-                      noWrap
+                    {/* Category Icon */}
+                    <Box
+                      sx={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: 2.5,
+                        bgcolor: config.bgColor,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
                     >
-                      {expense.title}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {expense.category}
-                    </Typography>
-                  </Box>
+                      <Icon
+                        sx={{
+                          fontSize: 22,
+                          color: config.color,
+                        }}
+                      />
+                    </Box>
 
-                  {/* Amount & Date */}
-                  <Box sx={{ textAlign: 'right', flexShrink: 0 }}>
-                    <Typography
-                      variant="body2"
-                      sx={{ fontWeight: 600 }}
-                      color="error.main"
+                    {/* Title */}
+                    <Box
+                      sx={{
+                        flex: 1,
+                        minWidth: 0,
+                      }}
                     >
-                      -{formatCurrency(expense.amount)}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {formatShortDate(expense.date)}
-                    </Typography>
-                  </Box>
-                </Box>
-              </ListItem>
-              {index < recentExpenses.length - 1 && (
-                <Divider sx={{ opacity: 0.5 }} />
-              )}
-            </React.Fragment>
-          );
-        })}
+                      <Typography
+                        variant="body2"
+                        fontWeight={600}
+                        noWrap
+                      >
+                        {expense.title}
+                      </Typography>
 
-        {recentExpenses.length === 0 && (
-          <Box sx={{ py: 4, textAlign: 'center' }}>
-            <Typography variant="body2" color="text.secondary">
-              No transactions yet
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                      >
+                        {expense.category}
+                      </Typography>
+                    </Box>
+
+                    {/* Amount */}
+                    <Box
+                      sx={{
+                        textAlign: 'right',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Chip
+                        label={`-${formatCurrency(expense.amount)}`}
+                        color="error"
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                          fontWeight: 600,
+                          mb: 0.5,
+                        }}
+                      />
+
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        display="block"
+                      >
+                        {getDisplayDate(expense.date)}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </ListItem>
+
+                {index < recentExpenses.length - 1 && (
+                  <Divider
+                    sx={{
+                      ml: 7,
+                      opacity: 0.4,
+                    }}
+                  />
+                )}
+              </React.Fragment>
+            );
+          })
+        ) : (
+          <Box
+            sx={{
+              py: 6,
+              textAlign: 'center',
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{ mb: 1 }}
+            >
+              🧾
             </Typography>
+
+            <Typography
+              variant="subtitle2"
+              fontWeight={600}
+            >
+              No Transactions Yet
+            </Typography>
+
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                mt: 1,
+                mb: 2,
+              }}
+            >
+              Start tracking your expenses to
+              see them here.
+            </Typography>
+
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => navigate('/expenses')}
+            >
+              Add Expense
+            </Button>
           </Box>
         )}
       </List>
